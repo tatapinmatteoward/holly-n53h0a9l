@@ -1,0 +1,77 @@
+---
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'Celebs', href: '/celebs' },
+  { name: 'Headlines', href: '/headlines' },
+  { name: 'Rumors', href: '/rumors' },
+  { name: 'Red-Carpet', href: '/red-carpet' },
+  { name: 'Galleries', href: '/galleries' }
+]
+
+const siteName = 'Hollywood Insider Daily'
+---
+
+<script>
+  let isMenuOpen = false;
+</script>
+
+<nav class="bg-[#6e0d25] text-white shadow-lg">
+  <div class="container mx-auto px-4 py-3">
+    <div class="flex justify-between items-center">
+      <a href="/" class="text-2xl md:text-3xl font-bold tracking-wide hover:text-[#d4af37] transition-colors duration-300">
+        {siteName}
+      </a>
+      
+      {/* Desktop Navigation */}
+      <div class="hidden md:flex gap-1">
+        {navLinks.map((link) => (
+          <a 
+            href={link.href}
+            class="px-4 py-2 font-bold tracking-wide hover:bg-[#d4af37] hover:text-[#6e0d25] transition-all duration-300"
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+      
+      {/* Mobile Menu Button */}
+      <button 
+        class="md:hidden text-white focus:outline-none"
+        onClick={() => isMenuOpen = !isMenuOpen}
+      >
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+    
+    {/* Mobile Navigation */}
+    <div class={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96' : 'max-h-0'}`}>
+      <div class="flex flex-col gap-1 py-3">
+        {navLinks.map((link) => (
+          <a 
+            href={link.href}
+            class="px-4 py-3 font-bold tracking-wide hover:bg-[#d4af37] hover:text-[#6e0d25] transition-all duration-300"
+            onClick={() => isMenuOpen = false}
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+  
+  .container {
+    max-width: 1200px;
+  }
+  
+  nav {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  a {
+    text-decoration: none;
+  }
+</style>
